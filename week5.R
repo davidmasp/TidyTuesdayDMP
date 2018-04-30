@@ -24,8 +24,8 @@ p1 = dat %>% dplyr::select(State,
                       Asian,
                       Pacific,
                       Unemployment) %>%
-  tidyr::gather(key = "Ethnicity", value = "Pop", -State, -Unemployment) %>% 
-  ggplot(aes(x = Pop, y = Unemployment,color = Ethnicity)) +
+  tidyr::gather(key = "Community", value = "Pop", -State, -Unemployment) %>% 
+  ggplot(aes(x = Pop, y = Unemployment,color = Community)) +
   geom_point(alpha = 0.05) +
   scale_color_manual(values = colors) +
   geom_smooth(method = "lm",se = FALSE) +
