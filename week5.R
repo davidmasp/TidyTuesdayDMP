@@ -37,6 +37,6 @@ p1 = dat %>% dplyr::select(State,
         axis.ticks = element_blank(),
         axis.text = element_blank())
 
-ggsave(p1,filename = "plot.png",width = 12,height = 8)
+ggsave(p1,filename = "week5.png",width = 12,height = 8)
 
 
