@@ -1,14 +1,7 @@
 # week 5
-# data source https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/acs2015_county_data.csv
+# data source
+# https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/acs2015_county_data.csv
 
-colors = c(
-  Asian = "#50B8E3",
-  Black = '#E3413F',
-  Hispanic = '#A94CFA',
-  Native = '#A6B256',
-  Pacific = '#A1FD55',
-  White = '#4A2BE3'
-)
 
 dat = readr::read_csv("week5/acs2015_county_data.csv")
 
@@ -27,10 +20,12 @@ p1 = dat %>% dplyr::select(State,
   tidyr::gather(key = "Community", value = "Pop", -State, -Unemployment) %>% 
   ggplot(aes(x = Pop, y = Unemployment,color = Community)) +
   geom_point(alpha = 0.05) +
-  scale_color_manual(values = colors) +
+  scale_color_brewer(palette = "Spectral") +
   geom_smooth(method = "lm",se = FALSE) +
   labs(x = "Percentage of the population",
-       y = "Unemployment Rate") +
+       y = "Unemployment Rate",
+       Title = "Unployment vs Community Percentage",
+       caption = "By @davidmasp , data from Kaggle") +
   facet_geo(~ State,scales = "free") +
   theme_cowplot(font_size = 8) +
   theme(axis.line = element_blank(),
@@ -38,5 +33,8 @@ p1 = dat %>% dplyr::select(State,
         axis.text = element_blank())
 
 ggsave(p1,filename = "week5.png",width = 12,height = 8)
+
+
+
 
 
