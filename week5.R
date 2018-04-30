@@ -24,7 +24,7 @@ p1 = dat %>% dplyr::select(State,
   geom_smooth(method = "lm",se = FALSE) +
   labs(x = "Percentage of the population",
        y = "Unemployment Rate",
-       Title = "Unployment vs Community Percentage",
+       title = "Unployment vs Community Percentage",
        caption = "By @davidmasp , data from Kaggle") +
   facet_geo(~ State,scales = "free") +
   theme_cowplot(font_size = 8) +
