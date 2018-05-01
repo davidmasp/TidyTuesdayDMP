@@ -10,31 +10,37 @@ library(cowplot)
 library(magrittr)
 
 p1 = dat %>% dplyr::select(State,
-                      Hispanic,
-                      White,
-                      Black,
-                      Native,
-                      Asian,
-                      Pacific,
-                      Unemployment) %>%
-  tidyr::gather(key = "Community", value = "Pop", -State, -Unemployment) %>% 
-  ggplot(aes(x = Pop, y = Unemployment,color = Community)) +
+                           Hispanic,
+                           White,
+                           Black,
+                           Native,
+                           Asian,
+                           Pacific,
+                           Unemployment) %>%
+  tidyr::gather(key = "Community", value = "Pop",-State,-Unemployment) %>%
+  ggplot(aes(x = Pop, y = Unemployment, color = Community)) +
   geom_point(alpha = 0.05) +
   scale_color_brewer(palette = "Spectral") +
-  geom_smooth(method = "lm",se = FALSE) +
-  labs(x = "Percentage of the population",
-       y = "Unemployment Rate",
-       title = "Unployment vs Community Percentage",
-       caption = "By @davidmasp , data from Kaggle") +
-  facet_geo(~ State,scales = "free") +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Percentage of the population",
+    y = "Unemployment Rate",
+    title = "Unemployment vs Community Percentage",
+    caption = "By @davidmasp , data from Kaggle"
+  ) +
+  facet_geo( ~ State, scales = "free") +
   theme_cowplot(font_size = 8) +
-  theme(axis.line = element_blank(),
-        axis.ticks = element_blank(),
-        axis.text = element_blank())
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = rel(1.8)
+    ),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank()
+  )
 
-ggsave(p1,filename = "week5.png",width = 12,height = 8)
-
-
-
-
-
+ggsave(p1,
+       filename = "week5.png",
+       width = 12,
+       height = 8)
